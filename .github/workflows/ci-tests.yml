@@ -55,7 +55,7 @@ jobs:
           node-version: 20
       
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: reference-data
       
       - name: Run tests
@@ -74,7 +74,7 @@ jobs:
           node-version: 20
       
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: web-front-end/angular
       
       - name: Run tests
@@ -95,7 +95,7 @@ jobs:
           node-version: 20
       
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: web-front-end/react
       
       - name: Run tests
