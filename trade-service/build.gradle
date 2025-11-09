@@ -29,6 +29,9 @@ configurations.all {
         } else if (details.requested.group == 'org.apache.tomcat.embed' && details.requested.name == 'tomcat-embed-core') {
             details.useVersion('10.1.44')
             details.because('CVE-2025-48989')
+        } else if (details.requested.group == 'org.apache.tomcat.embed' && details.requested.name == 'tomcat-embed-websocket') {
+            details.useVersion('10.1.44')
+            details.because('CVE-2025-52520, CVE-2025-53506, CVE-2025-48989')
         }
     }
 }
