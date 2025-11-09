@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick, fakeAsync, discardPeriodicTasks } from '@angular/core/testing';
 import { AgGridModule } from 'ag-grid-angular';
 import { TradeBlotterComponent } from './trade-blotter.component';
 import { PositionService } from 'main/app/service/position.service';
@@ -50,10 +50,12 @@ describe('TradeBlotterComponent', () => {
         component.ngOnChanges({ account: { currentValue: dummyAccounts[0] } } as any);
         expect(component.trades.length).toEqual(2);
         fixture.detectChanges();
-        tick(100)
+        tick(100);
         const rows = fixture.nativeElement.querySelectorAll('.ag-center-cols-container .ag-row');
         expect(rows.length).toEqual(2);
         expect(component.pendingTrades.length).toEqual(0);
+        component.ngOnDestroy();
+        discardPeriodicTasks();
     }));
 
     it('should call getTrades and subscribe to trade feed service for given account', async () => {
@@ -68,7 +70,7 @@ describe('TradeBlotterComponent', () => {
 
     it('getRowId should return id from trade data', () => {
         const params = { data: trades[0] } as any;
-        expect(component.getRowId(params)).toEqual(trades[0].id);
+        expect(component.getRowId(params)).toEqual(`Trade-${trades[0].id}`);
     });
 
 });
